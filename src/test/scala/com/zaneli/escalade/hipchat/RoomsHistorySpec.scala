@@ -49,11 +49,17 @@ class RoomsHistorySpec extends Specification with TestUtil {
     "call (full params)" in {
       val (holder, rooms) = mockRooms("Room", (100, 98, DateTime.now.getMillis / 1000))
 
-      rooms.history.call(7, Some("2013-12-01"), Some("Asia/Tokyo"))
+      rooms.history.call(7, Some((2013, 12, 1)), Some("Asia/Tokyo"))
 
       holder.method must_== "get"
       holder.path must_== "v1/rooms/history"
       holder.params must_== Map("room_id" -> "7", "date" -> "2013-12-01", "timezone" -> "Asia/Tokyo", "auth_token" -> "token")
+    }
+
+    "call (invalid date)" in {
+      val (holder, rooms) = mockRooms("Room", (100, 98, DateTime.now.getMillis / 1000))
+
+      rooms.history.call(7, Some((2013, 13, 1))) must throwA[HipChatException]("""\QInvalid date: Set (YYYY, MM, DD).\E""")
     }
 
     "call (Unauthorized token)" in {

@@ -4,6 +4,8 @@ import com.zaneli.escalade.hipchat.model.{ Message, RateLimit, Room }
 import com.zaneli.escalade.hipchat.param.{ Color, MessageFormat }
 import com.zaneli.escalade.hipchat.util.DataHandler
 import net.liftweb.json.{ DefaultFormats, parse }
+import org.scala_tools.time.Imports.DateTime
+import scala.util.Try
 
 class Rooms(private[this] val token: String) extends HttpExecutor with DataHandler {
 
@@ -55,12 +57,15 @@ class Rooms(private[this] val token: String) extends HttpExecutor with DataHandl
      * Fetch chat history for this room.
      *
      * @param roomId ID of the room.
-     * @param date Date to fetch history for in YYYY-MM-DD format. If no value set, fetch the latest 75 messages.
+     * @param date Date to fetch history. Set (YYYY, MM, DD) into tuple. If no value set, fetch the latest 75 messages.
      * @param timezone Your timezone. Must be a supported timezone(https://www.hipchat.com/docs/api/timezones).
      * @return Messages info and Rate Limiting info
      */
-    def call(roomId: Int, date: Option[String] = None, timezone: Option[String] = None): (List[Message], RateLimit) = {
-      val (res, rateLimit) = execute(Map("room_id" -> roomId, "date" -> date.getOrElse("recent"), "timezone" -> timezone))
+    def call(roomId: Int, date: Option[(Int, Int, Int)] = None, timezone: Option[String] = None): (List[Message], RateLimit) = {
+      if (date.exists { case (y, m, d) => Try(new DateTime(y, m, d, 0, 0)).isFailure }) {
+        throw HipChatException("Invalid date: Set (YYYY, MM, DD).")
+      }
+      val (res, rateLimit) = execute(Map("room_id" -> roomId, "date" -> date.map{ case (y, m, d) => f"${y}-${m}%02d-${d}%02d"}.getOrElse("recent"), "timezone" -> timezone))
       val rooms = (parse(res) \ "messages").children.map { Message.apply }
       (rooms, rateLimit)
     }
