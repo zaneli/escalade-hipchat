@@ -1,6 +1,8 @@
 #escalade-hipchat
 [HipChat](https://www.hipchat.com/ "HipChat") API Scala wrapper library.
 
+[![Build Status](https://api.travis-ci.org/zaneli/escalade-hipchat.png?branch=master)](https://travis-ci.org/zaneli/escalade-hipchat)
+
 ##Getting Started
 1. Create an API token. (Refer to [Official API Documentation](https://www.hipchat.com/docs/api "HipChat API Documentation"))
 2. Instantiate Rooms or Users class.
