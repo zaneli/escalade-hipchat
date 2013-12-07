@@ -7,7 +7,7 @@ import org.specs2.mutable.Specification
 class UsersUndeleteSpec extends Specification with TestUtil {
 
   "users/undelete" should {
-    "call" in {
+    "call (set userId)" in {
       val limit = 100
       val remaining = 99
       val reset = new DateTime(2013, 12, 1, 10, 5, 0)
@@ -22,6 +22,19 @@ class UsersUndeleteSpec extends Specification with TestUtil {
       undeleted must beTrue
 
       rate must_== RateLimit(limit, remaining, reset)
+    }
+
+    "call (set email)" in {
+      val limit = 100
+      val remaining = 99
+      val reset = new DateTime(2013, 12, 1, 10, 5, 0)
+      val (holder, users) = mockUsers("Undeleted", (limit, remaining, reset.getMillis / 1000))
+
+      users.undelete.call("garret@hipchat.com")
+
+      holder.method must_== "post"
+      holder.path must_== "v1/users/undelete"
+      holder.params must_== Map("user_id" -> "garret@hipchat.com", "auth_token" -> "token")
     }
 
     "call (Unauthorized token)" in {

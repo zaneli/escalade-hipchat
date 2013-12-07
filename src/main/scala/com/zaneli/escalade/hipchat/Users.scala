@@ -41,10 +41,18 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
      * @param userId ID of the user.
      * @return Deleted result and Rate Limiting info
      */
-    def call(userId: Int): (Boolean, RateLimit) = {
+    def call(userId: Int): (Boolean, RateLimit) = call(userId.toString)
+
+    /**
+     * Delete a user.
+     *
+     * @param email Email address of the user.
+     * @return Deleted result and Rate Limiting info
+     */
+    def call(email: String): (Boolean, RateLimit) = {
       implicit val formats = DefaultFormats
 
-      val (res, rateLimit) = execute(Map("user_id" -> userId))
+      val (res, rateLimit) = execute(Map("user_id" -> email))
       val deleted = (parse(res) \ "deleted").extract[Boolean]
       (deleted, rateLimit)
     }
@@ -71,8 +79,16 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
      * @param userId ID of the user.
      * @return User info and Rate Limiting info
      */
-    def call(userId: Int): (User, RateLimit) = {
-      val (res, rateLimit) = execute(Map("user_id" -> userId))
+    def call(userId: Int): (User, RateLimit) = call(userId.toString)
+
+    /**
+     * Get a user's details.
+     *
+     * @param email Email address of the user.
+     * @return User info and Rate Limiting info
+     */
+    def call(email: String): (User, RateLimit) = {
+      val (res, rateLimit) = execute(Map("user_id" -> email))
       val user = parse(res).children.map { User.apply }.head
       (user, rateLimit)
     }
@@ -85,10 +101,18 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
      * @param userId ID of the user.
      * @return Undeleted result and Rate Limiting info
      */
-    def call(userId: Int): (Boolean, RateLimit) = {
+    def call(userId: Int): (Boolean, RateLimit) = call(userId.toString)
+
+    /**
+     * Undelete a user.
+     *
+     * @param email Email address of the user.
+     * @return Undeleted result and Rate Limiting info
+     */
+    def call(email: String): (Boolean, RateLimit) = {
       implicit val formats = DefaultFormats
 
-      val (res, rateLimit) = execute(Map("user_id" -> userId))
+      val (res, rateLimit) = execute(Map("user_id" -> email))
       val deleted = (parse(res) \ "undeleted").extract[Boolean]
       (deleted, rateLimit)
     }

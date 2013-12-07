@@ -7,7 +7,7 @@ import org.specs2.mutable.Specification
 class UsersShowSpec extends Specification with TestUtil {
 
   "users/show" should {
-    "call" in {
+    "call (set userId)" in {
       val limit = 100
       val remaining = 99
       val reset = new DateTime(2013, 12, 1, 10, 5, 0)
@@ -35,6 +35,16 @@ class UsersShowSpec extends Specification with TestUtil {
       user.isDeleted must beFalse
 
       rate must_== RateLimit(limit, remaining, reset)
+    }
+
+    "call (set email)" in {
+      val (holder, users) = mockUsers("User", (100, 98, DateTime.now.getMillis / 1000))
+
+      users.show.call("pete@hipchat.com")
+
+      holder.method must_== "get"
+      holder.path must_== "v1/users/show"
+      holder.params must_== Map("user_id" -> "pete@hipchat.com", "auth_token" -> "token")
     }
 
     "call (Unauthorized token)" in {

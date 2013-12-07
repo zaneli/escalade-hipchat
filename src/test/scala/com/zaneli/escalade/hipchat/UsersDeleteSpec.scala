@@ -7,7 +7,7 @@ import org.specs2.mutable.Specification
 class UsersDeleteSpec extends Specification with TestUtil {
 
   "users/delete" should {
-    "call" in {
+    "call (set userId)" in {
       val limit = 100
       val remaining = 99
       val reset = new DateTime(2013, 12, 1, 10, 5, 0)
@@ -22,6 +22,16 @@ class UsersDeleteSpec extends Specification with TestUtil {
       deleted must beTrue
 
       rate must_== RateLimit(limit, remaining, reset)
+    }
+
+    "call (set email)" in {
+      val (holder, users) = mockUsers("Deleted", (100, 98, DateTime.now.getMillis / 1000))
+
+      users.delete.call("chris@hipchat.com")
+
+      holder.method must_== "post"
+      holder.path must_== "v1/users/delete"
+      holder.params must_== Map("user_id" -> "chris@hipchat.com", "auth_token" -> "token")
     }
 
     "call (Unauthorized token)" in {
