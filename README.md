@@ -1,0 +1,45 @@
+#escalade-hipchat
+[HipChat](https://www.hipchat.com/ "HipChat") API Scala wrapper library.
+
+##Getting Started
+1. Create an API token. (Refer to [Official API Documentation](https://www.hipchat.com/docs/api "HipChat API Documentation"))
+2. Instantiate Rooms or Users class.
+```
+val rooms = new com.zaneli.escalade.hipchat.Rooms(<API token>)
+val users = new com.zaneli.escalade.hipchat.Users(<API token>)
+```
+
+3. Execute `call` method.
+```
+rooms.list.call
+users.show.call(<user_id>)
+```
+
+##About Call Method
+* All objects corresponding to each API have a `call` method.
+```
+val (res, rate) = rooms.list.call
+val (res, rate) = users.show.call(<user_id>)
+```
+
+* All `call` methods return a pair, first is individual value and second is `escalade.hipchat.model.RateLimit`. (Refer to [Rate Limiting](https://www.hipchat.com/docs/api/rate_limiting "Rate Limiting"))
+```
+rate.limit     // The number of requests you are allowed per 5 minutes.
+rate.remaining // How many requests you can make before hitting the limit.
+rate.reset     // The next time (as a Unix timestamp) the limit will be updated.
+```
+
+##About Test Method
+* All objects corresponding to each API have a `test` method for testing token. (Refer to [Testing a token](https://www.hipchat.com/docs/api/auth "Authentication"))
+```
+val result = rooms.list.test
+val result = users.show.test
+```
+
+* All `test` methods return a `scala.util.Try`. If the token is valid, `scala.util.Success` will be returned. Otherwise, `scala.util.Failure` will be returned.
+```
+result match {
+  case Success((res, rate)) => // execute call method
+  case Failure(e) => throw e
+}
+```
