@@ -17,8 +17,8 @@ object UserIdentifier {
 
   import net.liftweb.json._
   /**
-   * A helper that will JSON serialize "user_id"
-   * users/create メソッドのレスポンスの json に "created":false　が含まれるため独自に実装
+   * A helper that will JSON deserialize UserId
+   * "user_id" の値は通常数値だが、"api", "guest" が文字列として設定される場合があるため独自に実装
    */
   private[model] object UserIdSerializer extends Serializer[UserId] {
     private val Class = classOf[UserId]
@@ -31,7 +31,7 @@ object UserIdentifier {
       }
     }
 
-    // json => Scala のデシリアライズにしか使用していないため、シリアライズメソッドは未実装
+    /** json => Scala のデシリアライズにしか使用していないため、シリアライズメソッドは未実装 */
     def serialize(implicit format: Formats): PartialFunction[Any, JValue] = ???
   }
 }

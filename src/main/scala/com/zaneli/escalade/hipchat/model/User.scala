@@ -32,12 +32,15 @@ object User extends DataHandler {
 
   import net.liftweb.json._
   /**
-   * A helper that will JSON serialize "created"
+   * A helper that will JSON deserialize Created
    * users/create メソッドのレスポンスの json に "created":false　が含まれるため独自に実装
    */
   private[this] object CreatedSerializer extends Serializer[Created] {
     private val Class = classOf[Created]
 
+    /**
+     * "created" の値がBooleanの場合、None扱いとする。
+     */
     def deserialize(implicit format: Formats): PartialFunction[(TypeInfo, JValue), Created] = {
       case (TypeInfo(Class, _), json) => json match {
         case JInt(iv) => Created(Some(iv.toLong))
@@ -46,7 +49,7 @@ object User extends DataHandler {
       }
     }
 
-    // json => Scala のデシリアライズにしか使用していないため、シリアライズメソッドは未実装
+    /** json => Scala のデシリアライズにしか使用していないため、シリアライズメソッドは未実装 */
     def serialize(implicit format: Formats): PartialFunction[Any, JValue] = ???
   }
 }

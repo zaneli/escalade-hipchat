@@ -10,6 +10,18 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
   private[this] val category = "users"
 
   object create extends AuthClientBase(httpExecute("post") _, "create", version, category, token) {
+    /**
+     * Create a new user in your group.
+     *
+     * @param email User's email.
+     * @param name User's full name. Set (firstName, lastName) into pair.
+     * @param mentionName User's mention name.
+     * @param title User's title.
+     * @param isGroupAdmin Whether or not this user is an admin.
+     * @param password User's password.
+     * @param timezone User's timezone. Must be a supported timezone(https://www.hipchat.com/docs/api/timezones).
+     * @return User info and Rate Limiting info
+     */
     def call(
         email: String, name: (String, String), mentionName: Option[String] = None, title: Option[String] = None,
         isGroupAdmin: Boolean = false, password: Option[String] = None, timezone: Option[String] = None): (User, RateLimit) = {
@@ -23,6 +35,12 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
   }
 
   object delete extends AuthClientBase(httpExecute("post") _, "delete", version, category, token) {
+    /**
+     * Delete a user.
+     *
+     * @param userId ID of the user.
+     * @return Deleted result and Rate Limiting info
+     */
     def call(userId: Int): (Boolean, RateLimit) = {
       implicit val formats = DefaultFormats
 
@@ -33,6 +51,12 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
   }
 
   object list extends AuthClientBase(httpExecute("get") _, "list", version, category, token) {
+    /**
+     * List all users in the group.
+     *
+     * @param includeDeleted Include deleted users in response.
+     * @return Users info and Rate Limiting info
+     */
     def call(includeDeleted: Boolean = false): (List[User], RateLimit) = {
       val (res, rateLimit) = execute(Map("include_deleted" -> bool2Int(includeDeleted)))
       val users = (parse(res) \ "users").children.map { User.apply }
@@ -41,6 +65,12 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
   }
 
   object show extends AuthClientBase(httpExecute("get") _, "show", version, category, token) {
+    /**
+     * Get a user's details.
+     *
+     * @param userId ID of the user.
+     * @return User info and Rate Limiting info
+     */
     def call(userId: Int): (User, RateLimit) = {
       val (res, rateLimit) = execute(Map("user_id" -> userId))
       val user = parse(res).children.map { User.apply }.head
@@ -49,6 +79,12 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
   }
 
   object undelete extends AuthClientBase(httpExecute("post") _, "undelete", version, category, token) {
+    /**
+     * Undelete a user.
+     *
+     * @param userId ID of the user.
+     * @return Undeleted result and Rate Limiting info
+     */
     def call(userId: Int): (Boolean, RateLimit) = {
       implicit val formats = DefaultFormats
 
@@ -59,6 +95,19 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
   }
 
   object update extends AuthClientBase(httpExecute("post") _, "update", version, category, token) {
+    /**
+     * Update a user.
+     *
+     * @param userId ID of the user.
+     * @param email User's email.
+     * @param name User's full name. Set (firstName, lastName) into pair.
+     * @param mentionName User's mention name.
+     * @param title User's title.
+     * @param isGroupAdmin Whether or not this user is an admin.
+     * @param password User's password.
+     * @param timezone User's timezone. Must be a supported timezone(https://www.hipchat.com/docs/api/timezones).
+     * @return Undeleted result and Rate Limiting info
+     */
     def call(
       userId: Int, email: Option[String] = None, name: Option[(String, String)] = None, mentionName: Option[String] = None, title: Option[String] = None,
       isGroupAdmin: Option[Boolean] = None, password: Option[String] = None, timezone: Option[String] = None): (User, RateLimit) = {
