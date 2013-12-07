@@ -1,0 +1,32 @@
+{
+  "room": {
+    "room_id": 7,
+    "name": "Ops",
+    "topic": "Chef is so awesome.",
+    "last_active": 1269020400,
+    "created": 1269010311,
+    "is_archived": false,
+    "is_private": true,
+    "owner_user_id": 5,
+    "member_user_ids": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "participants": [
+      {
+        "user_id": 5,
+        "name": "Garret Heaton"
+      },
+      {
+        "user_id": 1,
+        "name": "Chris Rivers"
+      }
+    ],
+    "privacy": "private",
+    "guest_access_url": null,
+    "xmpp_jid": "7_ops@conf.hipchat.com"
+  }
+}

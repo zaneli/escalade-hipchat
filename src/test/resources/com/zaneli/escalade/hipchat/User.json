@@ -1,0 +1,17 @@
+{
+  "user": {
+    "user_id": 5,
+    "name": "Garret Heaton",
+    "mention_name": "garret",
+    "last_active": 1360031425,
+    "created": 1315711352,
+    "email": "garret@hipchat.com",
+    "title": "Co-founder",
+    "photo_url": "https:\/\/www.hipchat.com\/img\/silhouette_125.png",
+    "status": "available",
+    "status_message": "Come see what I'm working on!",
+    "timezone": "US\/Central",
+    "is_group_admin": 1,
+    "is_deleted":0
+  }
+}

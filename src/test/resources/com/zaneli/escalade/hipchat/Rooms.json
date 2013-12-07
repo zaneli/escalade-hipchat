@@ -1,0 +1,28 @@
+{
+  "rooms": [
+    {
+      "room_id": 7,
+      "name": "Development",
+      "topic": "Make sure to document your API functions well!",
+      "last_active": 1269020400,
+      "created": 1269010311,
+      "owner_user_id": 1,
+      "is_archived": true,
+      "is_private": false,
+      "xmpp_jid": "7_development@conf.hipchat.com",
+      "guest_access_url": null
+    },
+    {
+      "room_id": 10,
+      "name": "Ops",
+      "topic": "",
+      "last_active": 1269010500,
+      "created": 1269010211,
+      "owner_user_id": 5,
+      "is_archived": false,
+      "is_private": true,
+      "xmpp_jid": "10_ops@conf.hipchat.com",
+      "guest_access_url": "https:\/\/www.hipchat.com\/XXXguest"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "user": {
+    "user_id": 3,
+    "name": "New Guy",
+    "mention_name": "NewGuy",
+    "email": "new@company.com",
+    "title": "Intern",
+    "password": "d294H58zlE",
+    "photo_url": "https:\/\/www.hipchat.com\/img\/silhouette_125.png",
+    "last_active": 0,
+    "created": false,
+    "status": "offline",
+    "status_message": "",
+    "timezone": "UTC",
+    "is_group_admin": 0,
+    "is_deleted": 0
+  }
+}
