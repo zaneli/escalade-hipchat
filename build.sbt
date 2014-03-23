@@ -19,3 +19,11 @@ libraryDependencies ++= {
     "org.specs2" %% "specs2" % "2.3.4" % "test"
   )
 }
+
+publishMavenStyle := true
+
+publishArtifact in Test := false
+
+pomIncludeRepository := { _ => false }
+
+publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath + "/.m2/repository")))

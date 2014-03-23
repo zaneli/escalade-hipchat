@@ -45,3 +45,37 @@ result match {
   case Failure(e) => throw e
 }
 ```
+
+##Maven Repository
+###pom.xml
+    <repositories>
+      <repository>
+        <id>com.zaneli</id>
+        <name>Zaneli Repository</name>
+        <url>http://www.zaneli.com/repositories/snapshots</url>
+      </repository>
+    </repositories>
+
+    <dependencies>
+      <dependency>
+        <groupId>com.zaneli</groupId>
+        <artifactId>escalade-hipchat_2.10</artifactId>
+        <version>0.0.1</version>
+      </dependency>
+    </dependencies>
+
+###build.sbt(Scala 2.10.x)
+    scalaVersion := "2.10.3"
+
+    resolvers += "Zaneli Repository" at "http://www.zaneli.com/repositories/snapshots"
+
+    libraryDependencies ++= {
+      Seq("com.zaneli" %% "escalade-hipchat" % "0.0.1")
+    }
+
+###build.sbt(Other Version)
+    resolvers += "Zaneli Repository" at "http://www.zaneli.com/repositories/snapshots"
+
+    libraryDependencies ++= {
+      Seq("com.zaneli" % "escalade-hipchat_2.10" % "0.0.1")
+    }
