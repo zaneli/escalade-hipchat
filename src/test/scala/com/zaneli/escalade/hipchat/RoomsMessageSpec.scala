@@ -1,8 +1,8 @@
 package com.zaneli.escalade.hipchat
 
+import com.github.nscala_time.time.Imports.{ DateTime, DateTimeZone }
 import com.zaneli.escalade.hipchat.model.RateLimit
 import com.zaneli.escalade.hipchat.param.{ Color, MessageFormat }
-import org.scala_tools.time.Imports.{ DateTime, DateTimeZone }
 import org.specs2.mutable.Specification
 
 class RoomsMessageSpec extends Specification with TestUtil {

@@ -1,8 +1,8 @@
 package com.zaneli.escalade.hipchat.model
 
+import com.github.nscala_time.time.Imports.DateTime
 import com.zaneli.escalade.hipchat.util.DataHandler
-import net.liftweb.json.{ DefaultFormats, JValue }
-import org.scala_tools.time.Imports.DateTime
+import org.json4s.{ DefaultFormats, JValue }
 
 case class User (
     userId: Int, name: String, mentionName: String, email: String, title: String, password: Option[String], photoUrl: String,
@@ -30,7 +30,7 @@ object User extends DataHandler {
       holder.status, holder.status_message, holder.timezone, int2bool(holder.is_group_admin), int2bool(holder.is_deleted))
   }
 
-  import net.liftweb.json._
+  import org.json4s._
   /**
    * A helper that will JSON deserialize Created
    * users/create メソッドのレスポンスの json に "created":false　が含まれるため独自に実装

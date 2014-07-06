@@ -1,7 +1,7 @@
 package com.zaneli.escalade.hipchat.model
 
-import net.liftweb.json.{ DefaultFormats, JValue }
-import org.scala_tools.time.Imports.DateTime
+import com.github.nscala_time.time.Imports.DateTime
+import org.json4s.{ DefaultFormats, JValue }
 
 case class Message private (date: DateTime, from: UserIdentifier, message: String, file: Option[File]) {
   override def toString = s"Message(date=${date}, from=${from}, message=${message}, file=${file})"

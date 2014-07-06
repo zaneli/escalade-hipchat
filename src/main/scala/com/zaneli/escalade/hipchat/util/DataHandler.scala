@@ -1,6 +1,6 @@
 package com.zaneli.escalade.hipchat.util
 
-import org.scala_tools.time.Imports.DateTime
+import com.github.nscala_time.time.Imports.DateTime
 import scala.util.Try
 
 trait DataHandler {

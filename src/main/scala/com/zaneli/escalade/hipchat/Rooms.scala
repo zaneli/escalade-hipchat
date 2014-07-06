@@ -1,10 +1,11 @@
 package com.zaneli.escalade.hipchat
 
+import com.github.nscala_time.time.Imports.DateTime
 import com.zaneli.escalade.hipchat.model.{ Message, RateLimit, Room }
 import com.zaneli.escalade.hipchat.param.{ Color, MessageFormat }
 import com.zaneli.escalade.hipchat.util.DataHandler
-import net.liftweb.json.{ DefaultFormats, parse }
-import org.scala_tools.time.Imports.DateTime
+import org.json4s.DefaultFormats
+import org.json4s.native.JsonMethods.parse
 import scala.util.Try
 
 class Rooms(private[this] val token: String) extends HttpExecutor with DataHandler {

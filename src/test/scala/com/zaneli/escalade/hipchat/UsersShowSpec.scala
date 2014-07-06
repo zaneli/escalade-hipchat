@@ -1,7 +1,7 @@
 package com.zaneli.escalade.hipchat
 
+import com.github.nscala_time.time.Imports.DateTime
 import com.zaneli.escalade.hipchat.model.RateLimit
-import org.scala_tools.time.Imports.DateTime
 import org.specs2.mutable.Specification
 
 class UsersShowSpec extends Specification with TestUtil {

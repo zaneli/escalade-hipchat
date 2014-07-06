@@ -1,8 +1,8 @@
 package com.zaneli.escalade.hipchat.model
 
+import com.github.nscala_time.time.Imports.DateTime
 import com.zaneli.escalade.hipchat.util.DataHandler
-import net.liftweb.json.{ DefaultFormats, JValue }
-import org.scala_tools.time.Imports.DateTime
+import org.json4s.{ DefaultFormats, JValue }
 
 case class Room (
   roomId: Int, name: String, topic: String, lastActive: Option[DateTime], created: DateTime, ownerUserId: Int,

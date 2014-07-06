@@ -1,7 +1,7 @@
 package com.zaneli.escalade.hipchat.model
 
+import com.github.nscala_time.time.Imports.DateTime
 import com.zaneli.escalade.hipchat.util.DataHandler
-import org.scala_tools.time.Imports.DateTime
 
 case class RateLimit (limit: Long, remaining: Long, reset: DateTime) {
   override def toString = s"RateLimit(limit=${limit}, remaining=${remaining}, reset=${reset})"

@@ -1,6 +1,6 @@
 package com.zaneli.escalade.hipchat.model
 
-import net.liftweb.json.{ DefaultFormats, JValue }
+import org.json4s.{ DefaultFormats, JValue }
 
 case class TestResult (code: Int, authType: String, message: String) {
   override def toString = s"TestResult(code=${code}, authType=${authType}, message=${message})"

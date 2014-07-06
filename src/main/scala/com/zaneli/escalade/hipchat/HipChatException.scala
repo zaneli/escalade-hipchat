@@ -1,6 +1,7 @@
 package com.zaneli.escalade.hipchat
 
-import net.liftweb.json.{ DefaultFormats, parse }
+import org.json4s.DefaultFormats
+import org.json4s.native.JsonMethods.parse
 import scalaj.http.HttpException
 
 class HipChatException private (val message: String, val cause: Exception) extends Exception(message, cause)

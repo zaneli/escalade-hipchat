@@ -2,7 +2,8 @@ package com.zaneli.escalade.hipchat
 
 import com.zaneli.escalade.hipchat.model.{ RateLimit, User }
 import com.zaneli.escalade.hipchat.util.DataHandler
-import net.liftweb.json.{ DefaultFormats, parse }
+import org.json4s.DefaultFormats
+import org.json4s.native.JsonMethods.parse
 
 class Users(private[this] val token: String) extends HttpExecutor with DataHandler {
 

@@ -1,7 +1,7 @@
 package com.zaneli.escalade.hipchat
 
+import com.github.nscala_time.time.Imports.{ DateTime, DateTimeZone }
 import com.zaneli.escalade.hipchat.model.{ File, RateLimit, UserIdentifier }
-import org.scala_tools.time.Imports.{ DateTime, DateTimeZone }
 import org.specs2.mutable.Specification
 
 class RoomsHistorySpec extends Specification with TestUtil {
