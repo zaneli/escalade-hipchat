@@ -47,35 +47,29 @@ result match {
 ```
 
 ##Maven Repository
+
+for Scala 2.10.x and Scala 2.11.x
+
 ###pom.xml
     <repositories>
       <repository>
         <id>com.zaneli</id>
         <name>Zaneli Repository</name>
-        <url>http://www.zaneli.com/repositories/snapshots</url>
+        <url>http://www.zaneli.com/repositories</url>
       </repository>
     </repositories>
 
     <dependencies>
       <dependency>
         <groupId>com.zaneli</groupId>
-        <artifactId>escalade-hipchat_2.10</artifactId>
+        <artifactId>escalade-hipchat_2.11</artifactId>
         <version>0.0.1</version>
       </dependency>
     </dependencies>
 
-###build.sbt(Scala 2.10.x)
-    scalaVersion := "2.10.3"
-
-    resolvers += "Zaneli Repository" at "http://www.zaneli.com/repositories/snapshots"
+###build.sbt
+    resolvers += "Zaneli Repository" at "http://www.zaneli.com/repositories"
 
     libraryDependencies ++= {
       Seq("com.zaneli" %% "escalade-hipchat" % "0.0.1")
-    }
-
-###build.sbt(Other Version)
-    resolvers += "Zaneli Repository" at "http://www.zaneli.com/repositories/snapshots"
-
-    libraryDependencies ++= {
-      Seq("com.zaneli" % "escalade-hipchat_2.10" % "0.0.1")
     }
