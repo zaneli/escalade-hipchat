@@ -17,7 +17,7 @@ libraryDependencies ++= {
     "org.slf4j" % "slf4j-api" % "1.7.7" % "compile",
     "ch.qos.logback" % "logback-classic" % "1.1.2" % "compile",
     "org.json4s" %% "json4s-native" % "3.2.9" % "compile",
-    "org.scalaj" %% "scalaj-http" % "0.3.15" % "compile",
+    "org.scalaj" %% "scalaj-http" % "0.3.16" % "compile",
     "org.specs2" %% "specs2" % "2.3.12" % "test"
   )
 }
