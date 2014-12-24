@@ -49,7 +49,7 @@ class UsersUpdateSpec extends Specification with TestUtil {
 
     "call (Unauthorized token)" in {
       val users = mockUnauthorizedUsers
-      users.update.call(5, name = Some("first", "last")) must throwA[HipChatException]("""\Q401: Unauthorized (Auth token invalid. Please see: https://www.hipchat.com/docs/api/auth)\E""")
+      users.update.call(5, name = Some("first", "last")) must throwA[HipChatAuthException](unauthorizedMessage)
     }
   }
 
@@ -71,7 +71,7 @@ class UsersUpdateSpec extends Specification with TestUtil {
 
     "test failure" in {
       val users = mockUnauthorizedUsers
-      users.update.test must beFailedTry.withThrowable[HipChatException]("""\Q401: Unauthorized (Auth token invalid. Please see: https://www.hipchat.com/docs/api/auth)\E""")
+      users.update.test must beFailedTry.withThrowable[HipChatAuthException](unauthorizedMessage)
     }
   }
 }

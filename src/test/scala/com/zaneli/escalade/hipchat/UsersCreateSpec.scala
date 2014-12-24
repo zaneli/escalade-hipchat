@@ -51,7 +51,7 @@ class UsersCreateSpec extends Specification with TestUtil {
 
     "call (Unauthorized token)" in {
       val users = mockUnauthorizedUsers
-      users.create.call("test@test.com", ("first_name", "last_name")) must throwA[HipChatException]("""\Q401: Unauthorized (Auth token invalid. Please see: https://www.hipchat.com/docs/api/auth)\E""")
+      users.create.call("test@test.com", ("first_name", "last_name")) must throwA[HipChatAuthException](unauthorizedMessage)
     }
   }
 
@@ -73,7 +73,7 @@ class UsersCreateSpec extends Specification with TestUtil {
 
     "test failure" in {
       val users = mockUnauthorizedUsers
-      users.create.test must beFailedTry.withThrowable[HipChatException]("""\Q401: Unauthorized (Auth token invalid. Please see: https://www.hipchat.com/docs/api/auth)\E""")
+      users.create.test must beFailedTry.withThrowable[HipChatAuthException](unauthorizedMessage)
     }
   }
 }

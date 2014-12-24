@@ -36,7 +36,7 @@ class RoomsTopicSpec extends Specification with TestUtil {
 
     "call (Unauthorized token)" in {
       val rooms = mockUnauthorizedRooms
-      rooms.topic.call(7, "Topic") must throwA[HipChatException]("""\Q401: Unauthorized (Auth token invalid. Please see: https://www.hipchat.com/docs/api/auth)\E""")
+      rooms.topic.call(7, "Topic") must throwA[HipChatAuthException](unauthorizedMessage)
     }
   }
 
@@ -58,7 +58,7 @@ class RoomsTopicSpec extends Specification with TestUtil {
 
     "test failure" in {
       val rooms = mockUnauthorizedRooms
-      rooms.topic.test must beFailedTry.withThrowable[HipChatException]("""\Q401: Unauthorized (Auth token invalid. Please see: https://www.hipchat.com/docs/api/auth)\E""")
+      rooms.topic.test must beFailedTry.withThrowable[HipChatAuthException](unauthorizedMessage)
     }
   }
 }
