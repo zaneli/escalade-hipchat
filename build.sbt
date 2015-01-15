@@ -29,3 +29,26 @@ publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
 
 publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath + "/.m2/repository")))
+
+pomExtra := (
+  <url>https://github.com/zaneli/escalade-hipchat</url>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>git@github.com:zaneli/escalade-hipchat.git</url>
+    <connection>scm:git:git@github.com:zaneli/escalade-hipchat.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>zaneli</id>
+      <name>Shunsuke Otani</name>
+      <url>https://github.com/zaneli</url>
+    </developer>
+  </developers>
+)
+
