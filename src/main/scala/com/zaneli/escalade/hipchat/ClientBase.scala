@@ -8,7 +8,7 @@ import scalaj.http.Http
 import scala.util.{ Failure, Success, Try }
 
 private[hipchat] abstract sealed class ClientBase(
-  private[this] val callApi: ((String, Map[String, String]) => (Int, Map[String, String], String)),
+  private[this] val callApi: ((String, Map[String, String]) => (Int, Map[String, Seq[String]], String)),
   private[this] val apiMethod: String,
   private[this] val version: String,
   private[this] val category: String) extends DataHandler with LazyLogging {
@@ -28,7 +28,7 @@ private[hipchat] abstract sealed class ClientBase(
 }
 
 private[hipchat] abstract class AuthClientBase(
-  private[this] val callApi: ((String, Map[String, String]) => (Int, Map[String, String], String)),
+  private[this] val callApi: ((String, Map[String, String]) => (Int, Map[String, Seq[String]], String)),
   private[this] val apiMethod: String,
   private[this] val version: String,
   private[this] val category: String,
@@ -52,7 +52,7 @@ private[hipchat] abstract class AuthClientBase(
 private[hipchat] trait HttpExecutor {
   private[this] val host = "api.hipchat.com"
 
-  protected[this] def httpExecute(method: String)(path: String, params: Map[String, String]): (Int, Map[String, String], String) = {
+  protected[this] def httpExecute(method: String)(path: String, params: Map[String, String]): (Int, Map[String, Seq[String]], String) = {
     val req = Http(s"http://${host}/${path}").params(params).method(method).timeout(connTimeoutMs = 5000, readTimeoutMs = 5000)
     val res = req.asString
     if (res.isError) {
