@@ -1,19 +1,27 @@
 package com.zaneli.escalade.hipchat
 
+import java.net.URL
+
 import com.github.nscala_time.time.Imports.DateTime
 import com.zaneli.escalade.hipchat.model.{ Message, RateLimit, Room }
 import com.zaneli.escalade.hipchat.param.{ Color, MessageFormat }
 import com.zaneli.escalade.hipchat.util.DataHandler
 import org.json4s.DefaultFormats
 import org.json4s.native.JsonMethods.parse
+
 import scala.util.Try
 
-class Rooms(private[this] val token: String) extends HttpExecutor with DataHandler {
+class Rooms(private[this] val host: String, private[this] val token: String) extends HttpExecutor with DataHandler {
 
+  def this(token: String) = {
+    this(defaultHost, token)
+  }
+
+  private[this] val baseURL = new URL(host)
   private[this] val version = "v1"
   private[this] val category = "rooms"
 
-  object create extends AuthClientBase(httpExecute("post") _, "create", version, category, token) {
+  object create extends AuthClientBase(httpExecute("post"), baseURL, "create", version, category, token) {
     /**
      * Creates a new room.
      *
@@ -37,7 +45,7 @@ class Rooms(private[this] val token: String) extends HttpExecutor with DataHandl
     }
   }
 
-  object delete extends AuthClientBase(httpExecute("post") _, "delete", version, category, token) {
+  object delete extends AuthClientBase(httpExecute("post"), baseURL, "delete", version, category, token) {
     /**
      * Deletes a room and kicks the current participants.
      *
@@ -53,7 +61,7 @@ class Rooms(private[this] val token: String) extends HttpExecutor with DataHandl
     }
   }
 
-  object history extends AuthClientBase(httpExecute("get") _, "history", version, category, token) {
+  object history extends AuthClientBase(httpExecute("get"), baseURL, "history", version, category, token) {
     /**
      * Fetch chat history for this room.
      *
@@ -72,7 +80,7 @@ class Rooms(private[this] val token: String) extends HttpExecutor with DataHandl
     }
   }
 
-  object list extends AuthClientBase(httpExecute("get") _, "list", version, category, token) {
+  object list extends AuthClientBase(httpExecute("get"), baseURL, "list", version, category, token) {
     /**
      * List rooms for this group.
      *
@@ -85,7 +93,7 @@ class Rooms(private[this] val token: String) extends HttpExecutor with DataHandl
     }
   }
 
-  object message extends AuthClientBase(httpExecute("post") _, "message", version, category, token) {
+  object message extends AuthClientBase(httpExecute("post"), baseURL, "message", version, category, token) {
     /**
      * Send a message to a room.
      *
@@ -115,7 +123,7 @@ class Rooms(private[this] val token: String) extends HttpExecutor with DataHandl
     }
   }
 
-  object topic extends AuthClientBase(httpExecute("post") _, "topic", version, category, token) {
+  object topic extends AuthClientBase(httpExecute("post"), baseURL, "topic", version, category, token) {
     /**
      * Set a room's topic.
      *
@@ -135,7 +143,7 @@ class Rooms(private[this] val token: String) extends HttpExecutor with DataHandl
     }
   }
 
-  object show extends AuthClientBase(httpExecute("get") _, "show", version, category, token) {
+  object show extends AuthClientBase(httpExecute("get"), baseURL, "show", version, category, token) {
     /**
      * Get room details.
      *
