@@ -16,7 +16,7 @@ class RoomsTopicSpec extends Specification with TestUtil {
       val (status, rate) = rooms.topic.call(7, "Topic")
 
       holder.method must_== "post"
-      holder.path must_== "v1/rooms/topic"
+      holder.url must_== "http://api.hipchat.com/v1/rooms/topic"
       holder.params must_== Map("room_id" -> "7", "topic" -> "Topic", "auth_token" -> "token")
 
       status must_== "ok"
@@ -30,7 +30,7 @@ class RoomsTopicSpec extends Specification with TestUtil {
       rooms.topic.call(7, "Topic", Some("escalade-hipchat"))
 
       holder.method must_== "post"
-      holder.path must_== "v1/rooms/topic"
+      holder.url must_== "http://api.hipchat.com/v1/rooms/topic"
       holder.params must_== Map("room_id" -> "7", "topic" -> "Topic", "from" -> "escalade-hipchat", "auth_token" -> "token")
     }
 

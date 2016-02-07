@@ -16,7 +16,7 @@ class UsersShowSpec extends Specification with TestUtil {
       val (user, rate) = users.show.call(5)
 
       holder.method must_== "get"
-      holder.path must_== "v1/users/show"
+      holder.url must_== "http://api.hipchat.com/v1/users/show"
       holder.params must_== Map("user_id" -> "5", "auth_token" -> "token")
 
       user.userId must_== 5
@@ -43,7 +43,7 @@ class UsersShowSpec extends Specification with TestUtil {
       users.show.call("pete@hipchat.com")
 
       holder.method must_== "get"
-      holder.path must_== "v1/users/show"
+      holder.url must_== "http://api.hipchat.com/v1/users/show"
       holder.params must_== Map("user_id" -> "pete@hipchat.com", "auth_token" -> "token")
     }
 

@@ -24,7 +24,7 @@ class UsersUpdateSpec extends Specification with TestUtil {
       )
 
       holder.method must_== "post"
-      holder.path must_== "v1/users/update"
+      holder.url must_== "http://api.hipchat.com/v1/users/update"
       holder.params must_== Map(
         "user_id" -> "5", "email" -> "garret@hipchat.com", "name" -> "Garret Heaton", "mention_name" -> "garret", "title" -> "Co-founder",
         "is_group_admin" -> "1", "password" -> "password", "timezone" -> "US/Central", "auth_token" -> "token")

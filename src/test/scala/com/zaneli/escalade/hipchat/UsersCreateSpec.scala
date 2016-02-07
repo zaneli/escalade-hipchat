@@ -16,7 +16,7 @@ class UsersCreateSpec extends Specification with TestUtil {
       val (user, rate) = users.create.call("test@test.com", ("first_name", "last_name"))
 
       holder.method must_== "post"
-      holder.path must_== "v1/users/create"
+      holder.url must_== "http://api.hipchat.com/v1/users/create"
       holder.params must_== Map("email" -> "test@test.com", "name" -> "first_name last_name", "is_group_admin" -> "0", "auth_token" -> "token")
 
       user.userId must_== 3
@@ -43,7 +43,7 @@ class UsersCreateSpec extends Specification with TestUtil {
       users.create.call("test@test.com", ("first_name", "last_name"), Some("mention"), Some("title"), true, Some("password"), Some("UTC"))
 
       holder.method must_== "post"
-      holder.path must_== "v1/users/create"
+      holder.url must_== "http://api.hipchat.com/v1/users/create"
       holder.params must_== Map(
         "email" -> "test@test.com", "name" -> "first_name last_name", "mention_name" -> "mention", "title" -> "title",
         "is_group_admin" -> "1", "password" -> "password", "timezone" -> "UTC", "auth_token" -> "token")

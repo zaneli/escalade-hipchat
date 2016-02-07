@@ -16,7 +16,7 @@ class RoomsDeleteSpec extends Specification with TestUtil {
       val (deleted, rate) = rooms.delete.call(7)
 
       holder.method must_== "post"
-      holder.path must_== "v1/rooms/delete"
+      holder.url must_== "http://api.hipchat.com/v1/rooms/delete"
       holder.params must_== Map("room_id" -> "7", "auth_token" -> "token")
 
       deleted must beTrue

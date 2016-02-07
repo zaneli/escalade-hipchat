@@ -17,7 +17,7 @@ class RoomsMessageSpec extends Specification with TestUtil {
       val (status, rate) = rooms.message.call(7, "user1", "Hello!")
 
       holder.method must_== "post"
-      holder.path must_== "v1/rooms/message"
+      holder.url must_== "http://api.hipchat.com/v1/rooms/message"
       holder.params must_== Map("room_id" -> "7", "from" -> "user1", "message" -> "Hello!", "notify" -> "0", "auth_token" -> "token")
 
       status must_== "sent"
@@ -31,7 +31,7 @@ class RoomsMessageSpec extends Specification with TestUtil {
       rooms.message.call(7, "user2", "Goodbye!", Some(MessageFormat.Text), true, Some(Color.Green))
 
       holder.method must_== "post"
-      holder.path must_== "v1/rooms/message"
+      holder.url must_== "http://api.hipchat.com/v1/rooms/message"
       holder.params must_== Map(
         "room_id" -> "7", "from" -> "user2", "message" -> "Goodbye!", "message_format" -> "text", "notify" -> "1", "color" -> "green", "auth_token" -> "token")
     }

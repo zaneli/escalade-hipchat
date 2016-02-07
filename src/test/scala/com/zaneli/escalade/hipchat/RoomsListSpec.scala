@@ -16,7 +16,7 @@ class RoomsListSpec extends Specification with TestUtil {
       val (res, rate) = rooms.list.call
 
       holder.method must_== "get"
-      holder.path must_== "v1/rooms/list"
+      holder.url must_== "http://api.hipchat.com/v1/rooms/list"
       holder.params must_== Map("auth_token" -> "token")
 
       res must have size 2

@@ -16,7 +16,7 @@ class UsersUndeleteSpec extends Specification with TestUtil {
       val (undeleted, rate) = users.undelete.call(12345)
 
       holder.method must_== "post"
-      holder.path must_== "v1/users/undelete"
+      holder.url must_== "http://api.hipchat.com/v1/users/undelete"
       holder.params must_== Map("user_id" -> "12345", "auth_token" -> "token")
 
       undeleted must beTrue
@@ -33,7 +33,7 @@ class UsersUndeleteSpec extends Specification with TestUtil {
       users.undelete.call("garret@hipchat.com")
 
       holder.method must_== "post"
-      holder.path must_== "v1/users/undelete"
+      holder.url must_== "http://api.hipchat.com/v1/users/undelete"
       holder.params must_== Map("user_id" -> "garret@hipchat.com", "auth_token" -> "token")
     }
 
