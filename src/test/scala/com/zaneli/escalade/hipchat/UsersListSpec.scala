@@ -16,7 +16,7 @@ class UsersListSpec extends Specification with TestUtil {
       val (res, rate) = users.list.call()
 
       holder.method must_== "get"
-      holder.path must_== "v1/users/list"
+      holder.url must_== "http://api.hipchat.com/v1/users/list"
       holder.params must_== Map("include_deleted" -> "0", "auth_token" -> "token")
 
       res must have size 3
@@ -82,7 +82,7 @@ class UsersListSpec extends Specification with TestUtil {
       users.list.call(true)
 
       holder.method must_== "get"
-      holder.path must_== "v1/users/list"
+      holder.url must_== "http://api.hipchat.com/v1/users/list"
       holder.params must_== Map("include_deleted" -> "1", "auth_token" -> "token")
     }
 

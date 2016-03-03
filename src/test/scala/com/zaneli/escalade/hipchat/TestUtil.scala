@@ -10,9 +10,9 @@ trait TestUtil {
   protected[this] def mockRooms(file: String, rateLimit: (Long, Long, Long)): (InputDataHolder, Rooms) = {
     val holder = new InputDataHolder
     val rooms = new Rooms("token") {
-      override def httpExecute(method: String)(path: String, params: Map[String, String]): (Int, Map[String, Seq[String]], String) = {
+      override def httpExecute(method: String)(url: String, params: Map[String, String]): (Int, Map[String, Seq[String]], String) = {
         holder.method = method
-        holder.path = path
+        holder.url = url
         holder.params = params
         dummyExecute(file, rateLimit)
       }
@@ -23,9 +23,9 @@ trait TestUtil {
   protected[this] def mockUsers(file: String, rateLimit: (Long, Long, Long)): (InputDataHolder, Users) = {
     val holder = new InputDataHolder
     val users = new Users("token") {
-      override def httpExecute(method: String)(path: String, params: Map[String, String]): (Int, Map[String, Seq[String]], String) = {
+      override def httpExecute(method: String)(url: String, params: Map[String, String]): (Int, Map[String, Seq[String]], String) = {
         holder.method = method
-        holder.path = path
+        holder.url = url
         holder.params = params
         dummyExecute(file, rateLimit)
       }
@@ -49,7 +49,7 @@ trait TestUtil {
 
   protected[this] class InputDataHolder {
     var method: String = _
-    var path: String = _
+    var url: String = _
     var params: Map[String, String] = _
   }
 

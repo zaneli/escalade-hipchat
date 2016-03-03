@@ -16,7 +16,7 @@ class RoomsShowSpec extends Specification with TestUtil {
       val (room, rate) = rooms.show.call(5)
 
       holder.method must_== "get"
-      holder.path must_== "v1/rooms/show"
+      holder.url must_== "http://api.hipchat.com/v1/rooms/show"
       holder.params must_== Map("room_id" -> "5", "auth_token" -> "token")
 
       room.roomId must_== 7

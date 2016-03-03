@@ -16,7 +16,7 @@ class UsersDeleteSpec extends Specification with TestUtil {
       val (deleted, rate) = users.delete.call(12345)
 
       holder.method must_== "post"
-      holder.path must_== "v1/users/delete"
+      holder.url must_== "http://api.hipchat.com/v1/users/delete"
       holder.params must_== Map("user_id" -> "12345", "auth_token" -> "token")
 
       deleted must beTrue
@@ -30,7 +30,7 @@ class UsersDeleteSpec extends Specification with TestUtil {
       users.delete.call("chris@hipchat.com")
 
       holder.method must_== "post"
-      holder.path must_== "v1/users/delete"
+      holder.url must_== "http://api.hipchat.com/v1/users/delete"
       holder.params must_== Map("user_id" -> "chris@hipchat.com", "auth_token" -> "token")
     }
 

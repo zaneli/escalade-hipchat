@@ -1,16 +1,23 @@
 package com.zaneli.escalade.hipchat
 
+import java.net.URL
+
 import com.zaneli.escalade.hipchat.model.{ RateLimit, User }
 import com.zaneli.escalade.hipchat.util.DataHandler
 import org.json4s.DefaultFormats
 import org.json4s.native.JsonMethods.parse
 
-class Users(private[this] val token: String) extends HttpExecutor with DataHandler {
+class Users(private[this] val host: String, private[this] val token: String) extends HttpExecutor with DataHandler {
 
+  def this(token: String) = {
+    this(defaultHost, token)
+  }
+
+  private[this] val baseURL = new URL(host)
   private[this] val version = "v1"
   private[this] val category = "users"
 
-  object create extends AuthClientBase(httpExecute("post") _, "create", version, category, token) {
+  object create extends AuthClientBase(httpExecute("post"), baseURL, "create", version, category, token) {
     /**
      * Create a new user in your group.
      *
@@ -35,7 +42,7 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
     }
   }
 
-  object delete extends AuthClientBase(httpExecute("post") _, "delete", version, category, token) {
+  object delete extends AuthClientBase(httpExecute("post"), baseURL, "delete", version, category, token) {
     /**
      * Delete a user.
      *
@@ -59,7 +66,7 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
     }
   }
 
-  object list extends AuthClientBase(httpExecute("get") _, "list", version, category, token) {
+  object list extends AuthClientBase(httpExecute("get"), baseURL, "list", version, category, token) {
     /**
      * List all users in the group.
      *
@@ -73,7 +80,7 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
     }
   }
 
-  object show extends AuthClientBase(httpExecute("get") _, "show", version, category, token) {
+  object show extends AuthClientBase(httpExecute("get"), baseURL, "show", version, category, token) {
     /**
      * Get a user's details.
      *
@@ -95,7 +102,7 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
     }
   }
 
-  object undelete extends AuthClientBase(httpExecute("post") _, "undelete", version, category, token) {
+  object undelete extends AuthClientBase(httpExecute("post"), baseURL, "undelete", version, category, token) {
     /**
      * Undelete a user.
      *
@@ -119,7 +126,7 @@ class Users(private[this] val token: String) extends HttpExecutor with DataHandl
     }
   }
 
-  object update extends AuthClientBase(httpExecute("post") _, "update", version, category, token) {
+  object update extends AuthClientBase(httpExecute("post"), baseURL, "update", version, category, token) {
     /**
      * Update a user.
      *

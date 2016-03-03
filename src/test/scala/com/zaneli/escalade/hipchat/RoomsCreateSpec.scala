@@ -16,7 +16,7 @@ class RoomsCreateSpec extends Specification with TestUtil {
       val (room, rate) = rooms.create.call("Development", 5)
 
       holder.method must_== "post"
-      holder.path must_== "v1/rooms/create"
+      holder.url must_== "http://api.hipchat.com/v1/rooms/create"
       holder.params must_== Map("name" -> "Development", "owner_user_id" -> "5", "privacy" -> "public", "guest_access" -> "0", "auth_token" -> "token")
 
       room.roomId must_== 7
@@ -42,7 +42,7 @@ class RoomsCreateSpec extends Specification with TestUtil {
       rooms.create.call("Development", 5, true, Some("topic"), true)
 
       holder.method must_== "post"
-      holder.path must_== "v1/rooms/create"
+      holder.url must_== "http://api.hipchat.com/v1/rooms/create"
       holder.params must_== Map(
         "name" -> "Development", "owner_user_id" -> "5", "privacy" -> "private", "topic" -> "topic", "guest_access" -> "1", "auth_token" -> "token")
     }

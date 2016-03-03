@@ -16,7 +16,7 @@ class RoomsHistorySpec extends Specification with TestUtil {
       val (messages, rate) = rooms.history.call(7)
 
       holder.method must_== "get"
-      holder.path must_== "v1/rooms/history"
+      holder.url must_== "http://api.hipchat.com/v1/rooms/history"
       holder.params must_== Map("room_id" -> "7", "date" -> "recent", "auth_token" -> "token")
 
       messages must have size 3
@@ -52,12 +52,12 @@ class RoomsHistorySpec extends Specification with TestUtil {
       rooms.history.call(7, Some((2013, 12, 1)), Some("Asia/Tokyo"))
 
       holder.method must_== "get"
-      holder.path must_== "v1/rooms/history"
+      holder.url must_== "http://api.hipchat.com/v1/rooms/history"
       holder.params must_== Map("room_id" -> "7", "date" -> "2013-12-01", "timezone" -> "Asia/Tokyo", "auth_token" -> "token")
     }
 
     "call (invalid date)" in {
-      val (holder, rooms) = mockRooms("Room", (100, 98, DateTime.now.getMillis / 1000))
+      val (_, rooms) = mockRooms("Room", (100, 98, DateTime.now.getMillis / 1000))
 
       rooms.history.call(7, Some((2013, 13, 1))) must throwA[HipChatException]("""\QInvalid date: Set (YYYY, MM, DD).\E""")
     }
