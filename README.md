@@ -4,14 +4,19 @@
 [![Build Status](https://api.travis-ci.org/zaneli/escalade-hipchat.png?branch=master)](https://travis-ci.org/zaneli/escalade-hipchat)
 
 ##Getting Started
-1. Create an API token. (Refer to [Official API Documentation](https://www.hipchat.com/docs/api "HipChat API Documentation"))
-2. Instantiate Rooms or Users class.
+* Create an API token. (Refer to [Official API Documentation](https://www.hipchat.com/docs/api "HipChat API Documentation"))
+* Instantiate Rooms or Users class.
 ```
+// for HipChat Cloud
 val rooms = new com.zaneli.escalade.hipchat.Rooms(<API token>)
 val users = new com.zaneli.escalade.hipchat.Users(<API token>)
 ```
-
-3. Execute `call` method.
+```
+// for HipChat Server
+val rooms = new com.zaneli.escalade.hipchat.Rooms("http://example.hipchatserver.com", <API token>)
+val users = new com.zaneli.escalade.hipchat.Users("http://example.hipchatserver.com", <API token>)
+```
+* Execute `call` method.
 ```
 rooms.list.call
 users.show.call(<user_id>)
