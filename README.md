@@ -68,7 +68,7 @@ for Scala 2.10.x and Scala 2.11.x
       <dependency>
         <groupId>com.zaneli</groupId>
         <artifactId>escalade-hipchat_2.11</artifactId>
-        <version>0.0.1</version>
+        <version>0.0.2</version>
       </dependency>
     </dependencies>
 
@@ -76,5 +76,5 @@ for Scala 2.10.x and Scala 2.11.x
     resolvers += "Zaneli Repository" at "http://www.zaneli.com/repositories"
 
     libraryDependencies ++= {
-      Seq("com.zaneli" %% "escalade-hipchat" % "0.0.1")
+      Seq("com.zaneli" %% "escalade-hipchat" % "0.0.2")
     }
