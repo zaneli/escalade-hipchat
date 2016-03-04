@@ -8,8 +8,8 @@ class UsersUndeleteSpec extends Specification with TestUtil {
 
   "users/undelete" should {
     "call (set userId)" in {
-      val limit = 100
-      val remaining = 99
+      val limit = 100L
+      val remaining = 99L
       val reset = new DateTime(2013, 12, 1, 10, 5, 0)
       val (holder, users) = mockUsers("Undeleted", (limit, remaining, reset.getMillis / 1000))
 
@@ -25,8 +25,8 @@ class UsersUndeleteSpec extends Specification with TestUtil {
     }
 
     "call (set email)" in {
-      val limit = 100
-      val remaining = 99
+      val limit = 100L
+      val remaining = 99L
       val reset = new DateTime(2013, 12, 1, 10, 5, 0)
       val (holder, users) = mockUsers("Undeleted", (limit, remaining, reset.getMillis / 1000))
 
@@ -45,8 +45,8 @@ class UsersUndeleteSpec extends Specification with TestUtil {
 
   "users/undelete?auth_test=true" should {
     "test success" in {
-      val limit = 100
-      val remaining = 98
+      val limit = 100L
+      val remaining = 98L
       val reset = new DateTime(2013, 12, 1, 11, 5, 0)
       val (_, users) = mockUsers("TestResult", (limit, remaining, reset.getMillis / 1000))
 

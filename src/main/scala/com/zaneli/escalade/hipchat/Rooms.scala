@@ -33,7 +33,7 @@ class Rooms(private[this] val host: String, private[this] val token: String) ext
      * @return Room info and Rate Limiting info
      */
     def call(name: String, ownerUserId: Int, privateMode: Boolean = false, topic: Option[String] = None, guestAccess: Boolean = false): (Room, RateLimit) = {
-      val params = Map(
+      val params: Map[String, Any] = Map(
         "name" -> name,
         "owner_user_id" -> ownerUserId,
         "privacy" -> (if (privateMode) "private" else "public"),
@@ -112,7 +112,7 @@ class Rooms(private[this] val host: String, private[this] val token: String) ext
     ): (String, RateLimit) = {
       implicit val formats = DefaultFormats
 
-      val params = Map(
+      val params: Map[String, Any] = Map(
         "room_id" -> roomId,
         "from" -> from,
         "message" -> message,
@@ -140,7 +140,7 @@ class Rooms(private[this] val host: String, private[this] val token: String) ext
     ): (String, RateLimit) = {
       implicit val formats = DefaultFormats
 
-      val params = Map("room_id" -> roomId, "topic" -> topic, "from" -> from)
+      val params: Map[String, Any] = Map("room_id" -> roomId, "topic" -> topic, "from" -> from)
       val (res, rateLimit) = execute(params)
       val status = (parse(res) \ "status").extract[String]
       (status, rateLimit)

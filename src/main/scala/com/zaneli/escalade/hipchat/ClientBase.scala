@@ -51,7 +51,7 @@ private[hipchat] abstract class AuthClientBase(
     try {
       val (body, rateLimit) = execute(Map("auth_test" -> "true"))
       val result = parse(body).children.map { TestResult.apply }.head
-      Success(result, rateLimit)
+      Success((result, rateLimit))
     } catch {
       case e: HipChatAuthException => Failure(e)
       case t: Throwable => throw t

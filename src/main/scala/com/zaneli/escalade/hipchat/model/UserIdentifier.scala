@@ -22,7 +22,7 @@ object UserIdentifier {
 
     def deserialize(implicit format: Formats): PartialFunction[(TypeInfo, JValue), UserId] = {
       case (TypeInfo(Class, _), json) => json match {
-        case JInt(iv) => UserId(Right(iv.toInt))
+        case JInt(iv) => UserId(Right(iv.toLong))
         case JString(sv) => UserId(Left(sv))
         case value => throw new MappingException(s"Can't convert $value to $Class")
       }

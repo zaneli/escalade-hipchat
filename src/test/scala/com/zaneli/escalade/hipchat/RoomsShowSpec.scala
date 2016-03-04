@@ -8,8 +8,8 @@ class RoomsShowSpec extends Specification with TestUtil {
 
   "rooms/show" should {
     "call" in {
-      val limit = 100
-      val remaining = 99
+      val limit = 100L
+      val remaining = 99L
       val reset = new DateTime(2013, 12, 1, 10, 5, 0)
       val (holder, rooms) = mockRooms("Room", (limit, remaining, reset.getMillis / 1000))
 
@@ -44,8 +44,8 @@ class RoomsShowSpec extends Specification with TestUtil {
 
   "rooms/show?auth_test=true" should {
     "test success" in {
-      val limit = 100
-      val remaining = 98
+      val limit = 100L
+      val remaining = 98L
       val reset = new DateTime(2013, 12, 1, 11, 5, 0)
       val (_, rooms) = mockRooms("TestResult", (limit, remaining, reset.getMillis / 1000))
 

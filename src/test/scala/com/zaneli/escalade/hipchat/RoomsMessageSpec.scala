@@ -9,8 +9,8 @@ class RoomsMessageSpec extends Specification with TestUtil {
 
   "rooms/message" should {
     "call (min params)" in {
-      val limit = 100
-      val remaining = 99
+      val limit = 100L
+      val remaining = 99L
       val reset = new DateTime(2013, 12, 1, 10, 5, 0)
       val (holder, rooms) = mockRooms("StatusSent", (limit, remaining, reset.getMillis / 1000))
 
@@ -45,8 +45,8 @@ class RoomsMessageSpec extends Specification with TestUtil {
 
   "rooms/message?auth_test=true" should {
     "test success" in {
-      val limit = 100
-      val remaining = 97
+      val limit = 100L
+      val remaining = 97L
       val reset = new DateTime(2013, 12, 1, 12, 5, 0)
       val (_, rooms) = mockRooms("TestResult", (limit, remaining, reset.getMillis / 1000))
 

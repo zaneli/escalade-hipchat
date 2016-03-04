@@ -8,15 +8,30 @@ organization := "com.zaneli"
 
 crossScalaVersions := Seq("2.10.6", "2.11.7")
 
-scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature", "-language:implicitConversions")
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-feature",
+  "-unchecked",
+  "-Xlint",
+  "-Ywarn-dead-code",
+  "-Ywarn-numeric-widen",
+  "-Ywarn-value-discard"
+) ++ (if (scalaVersion.value.startsWith("2.10")) {
+  Nil
+} else {
+  Seq(
+    "-Ywarn-unused",
+    "-Ywarn-unused-import"
+  )
+})
 
 libraryDependencies ++= {
   Seq(
-    "com.github.nscala-time" %% "nscala-time" % "2.10.0" % "compile",
-    "org.slf4j" % "slf4j-api" % "1.7.18" % "compile",
-    "org.json4s" %% "json4s-native" % "3.3.0" % "compile",
-    "org.scalaj" %% "scalaj-http" % "2.2.1" % "compile",
-    "org.specs2" %% "specs2-core" % "3.7.1" % "test"
+    "com.github.nscala-time" %% "nscala-time" % "2.10.0" % Compile,
+    "org.slf4j" % "slf4j-api" % "1.7.18" % Compile,
+    "org.json4s" %% "json4s-native" % "3.3.0" % Compile,
+    "org.scalaj" %% "scalaj-http" % "2.2.1" % Compile,
+    "org.specs2" %% "specs2-core" % "3.7.1" % Test
   )
 }
 

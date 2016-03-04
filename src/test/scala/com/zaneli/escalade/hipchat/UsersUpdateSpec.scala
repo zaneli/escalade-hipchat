@@ -13,8 +13,8 @@ class UsersUpdateSpec extends Specification with TestUtil {
     }
 
     "call (full params)" in {
-      val limit = 100
-      val remaining = 98
+      val limit = 100L
+      val remaining = 98L
       val reset = new DateTime(2013, 12, 1, 11, 5, 0)
       val (holder, users) = mockUsers("User", (limit, remaining, reset.getMillis / 1000))
 
@@ -50,14 +50,14 @@ class UsersUpdateSpec extends Specification with TestUtil {
 
     "call (Unauthorized token)" in {
       val users = mockUnauthorizedUsers
-      users.update.call(5, name = Some("first", "last")) must throwA[HipChatAuthException](unauthorizedMessage)
+      users.update.call(5, name = Some(("first", "last"))) must throwA[HipChatAuthException](unauthorizedMessage)
     }
   }
 
   "users/update?auth_test=true" should {
     "test success" in {
-      val limit = 100
-      val remaining = 97
+      val limit = 100L
+      val remaining = 97L
       val reset = new DateTime(2013, 12, 1, 12, 5, 0)
       val (_, users) = mockUsers("TestResult", (limit, remaining, reset.getMillis / 1000))
 
