@@ -11,17 +11,18 @@ import scalaj.http.Http
 import scala.util.{ Failure, Success, Try }
 
 private[hipchat] abstract sealed class ClientBase(
-  private[this] val callApi: ((String, Map[String, String]) => (Int, Map[String, Seq[String]], String)),
-  private[this] val baseURL: URL,
-  private[this] val apiMethod: String,
-  private[this] val version: String,
-  private[this] val category: String) extends DataHandler with LazyLogging {
+    private[this] val callApi: ((String, Map[String, String]) => (Int, Map[String, Seq[String]], String)),
+    private[this] val baseURL: URL,
+    private[this] val apiMethod: String,
+    private[this] val version: String,
+    private[this] val category: String
+) extends DataHandler with LazyLogging {
 
   protected[this] def execute(params: Map[String, Any]): (String, RateLimit) = {
     val apiParams = value2String(params)
     logger.debug(s"params  = ${apiParams}")
 
-    val host = s"${baseURL.getProtocol}://${baseURL.getHost}" + Option(baseURL.getPort).collect{ case p if p != -1 => s":$p"}.getOrElse("")
+    val host = s"${baseURL.getProtocol}://${baseURL.getHost}" + Option(baseURL.getPort).collect { case p if p != -1 => s":$p" }.getOrElse("")
     val (code, headers, body) = callApi(s"${host}/${version}/${category}/${apiMethod}", apiParams)
 
     logger.debug(s"code    = ${code}")
@@ -33,12 +34,13 @@ private[hipchat] abstract sealed class ClientBase(
 }
 
 private[hipchat] abstract class AuthClientBase(
-  private[this] val callApi: ((String, Map[String, String]) => (Int, Map[String, Seq[String]], String)),
-  private[this] val baseURL: URL,
-  private[this] val apiMethod: String,
-  private[this] val version: String,
-  private[this] val category: String,
-  private[this] val token: String) extends ClientBase(callApi, baseURL, apiMethod, version, category) {
+    private[this] val callApi: ((String, Map[String, String]) => (Int, Map[String, Seq[String]], String)),
+    private[this] val baseURL: URL,
+    private[this] val apiMethod: String,
+    private[this] val version: String,
+    private[this] val category: String,
+    private[this] val token: String
+) extends ClientBase(callApi, baseURL, apiMethod, version, category) {
 
   override protected[this] def execute(params: Map[String, Any] = Map()): (String, RateLimit) =
     super.execute(params.updated("auth_token", token))

@@ -27,7 +27,8 @@ class UsersUpdateSpec extends Specification with TestUtil {
       holder.url must_== "http://api.hipchat.com/v1/users/update"
       holder.params must_== Map(
         "user_id" -> "5", "email" -> "garret@hipchat.com", "name" -> "Garret Heaton", "mention_name" -> "garret", "title" -> "Co-founder",
-        "is_group_admin" -> "1", "password" -> "password", "timezone" -> "US/Central", "auth_token" -> "token")
+        "is_group_admin" -> "1", "password" -> "password", "timezone" -> "US/Central", "auth_token" -> "token"
+      )
 
       user.userId must_== 5
       user.name must_== "Garret Heaton"
@@ -60,12 +61,13 @@ class UsersUpdateSpec extends Specification with TestUtil {
       val reset = new DateTime(2013, 12, 1, 12, 5, 0)
       val (_, users) = mockUsers("TestResult", (limit, remaining, reset.getMillis / 1000))
 
-      users.update.test must beSuccessfulTry.which { case (result, rate) =>
-        result.code must_== 202
-        result.authType must_== "Accepted"
-        result.message must_== "This auth_token has access to use this method."
+      users.update.test must beSuccessfulTry.which {
+        case (result, rate) =>
+          result.code must_== 202
+          result.authType must_== "Accepted"
+          result.message must_== "This auth_token has access to use this method."
 
-        rate must_== RateLimit(limit, remaining, reset)
+          rate must_== RateLimit(limit, remaining, reset)
       }
     }
 

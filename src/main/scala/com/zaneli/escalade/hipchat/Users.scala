@@ -31,8 +31,9 @@ class Users(private[this] val host: String, private[this] val token: String) ext
      * @return User info and Rate Limiting info
      */
     def call(
-        email: String, name: (String, String), mentionName: Option[String] = None, title: Option[String] = None,
-        isGroupAdmin: Boolean = false, password: Option[String] = None, timezone: Option[String] = None): (User, RateLimit) = {
+      email: String, name: (String, String), mentionName: Option[String] = None, title: Option[String] = None,
+      isGroupAdmin: Boolean = false, password: Option[String] = None, timezone: Option[String] = None
+    ): (User, RateLimit) = {
       val (res, rateLimit) = execute(Map(
         "email" -> email, "name" -> s"${name._1} ${name._2}", "mention_name" -> mentionName, "title" -> title,
         "is_group_admin" -> bool2Int(isGroupAdmin), "password" -> password, "timezone" -> timezone
@@ -142,13 +143,14 @@ class Users(private[this] val host: String, private[this] val token: String) ext
      */
     def call(
       userId: Int, email: Option[String] = None, name: Option[(String, String)] = None, mentionName: Option[String] = None, title: Option[String] = None,
-      isGroupAdmin: Option[Boolean] = None, password: Option[String] = None, timezone: Option[String] = None): (User, RateLimit) = {
+      isGroupAdmin: Option[Boolean] = None, password: Option[String] = None, timezone: Option[String] = None
+    ): (User, RateLimit) = {
       if (Seq(email, name, mentionName, title, isGroupAdmin, password, timezone).forall(_.isEmpty)) {
         throw HipChatException("Invalid params: Set a item at least.")
       }
 
       val (res, rateLimit) = execute(Map(
-        "user_id" -> userId, "email" -> email, "name" -> name.map{ case (f, l) => s"${f} ${l}" }, "mention_name" -> mentionName, "title" -> title,
+        "user_id" -> userId, "email" -> email, "name" -> name.map { case (f, l) => s"${f} ${l}" }, "mention_name" -> mentionName, "title" -> title,
         "is_group_admin" -> isGroupAdmin.map(bool2Int), "password" -> password, "timezone" -> timezone
       ))
       val user = parse(res).children.map { User.apply }.head

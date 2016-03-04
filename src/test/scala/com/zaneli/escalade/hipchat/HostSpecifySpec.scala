@@ -82,7 +82,9 @@ class HostSpecifySpec extends Specification with TestUtil {
       Map(
         "X-RateLimit-Limit" -> Seq("1"),
         "X-RateLimit-Remaining" -> Seq("1"),
-        "X-RateLimit-Reset" -> Seq("1")),
-      "")
+        "X-RateLimit-Reset" -> Seq("1")
+      ),
+        ""
+    )
   }
 }

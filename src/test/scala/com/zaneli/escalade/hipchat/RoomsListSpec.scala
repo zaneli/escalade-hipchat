@@ -64,12 +64,13 @@ class RoomsListSpec extends Specification with TestUtil {
       val reset = new DateTime(2013, 12, 1, 11, 5, 0)
       val (_, rooms) = mockRooms("TestResult", (limit, remaining, reset.getMillis / 1000))
 
-      rooms.list.test must beSuccessfulTry.which { case (result, rate) =>
-        result.code must_== 202
-        result.authType must_== "Accepted"
-        result.message must_== "This auth_token has access to use this method."
+      rooms.list.test must beSuccessfulTry.which {
+        case (result, rate) =>
+          result.code must_== 202
+          result.authType must_== "Accepted"
+          result.message must_== "This auth_token has access to use this method."
 
-        rate must_== RateLimit(limit, remaining, reset)
+          rate must_== RateLimit(limit, remaining, reset)
       }
     }
 

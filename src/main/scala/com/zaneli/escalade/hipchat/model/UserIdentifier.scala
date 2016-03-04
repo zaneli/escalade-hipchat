@@ -3,7 +3,7 @@ package com.zaneli.escalade.hipchat.model
 import com.zaneli.escalade.hipchat.util.DataHandler
 import org.json4s.{ DefaultFormats, JValue }
 
-case class UserIdentifier (userId: Either[String, Long], name: String) {
+case class UserIdentifier(userId: Either[String, Long], name: String) {
   override def toString = s"UserIdentifier(userId=${userId}, name=${name})"
 }
 

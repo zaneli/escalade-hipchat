@@ -17,7 +17,7 @@ object Message {
   }
 }
 
-case class File (name: String, size: Int, url: String) {
+case class File(name: String, size: Int, url: String) {
   override def toString = s"File(name=${name}, size=${size}, url=${url})"
 }
 

@@ -60,13 +60,16 @@ trait TestUtil {
       Map(
         "X-RateLimit-Limit" -> Seq(limit.toString),
         "X-RateLimit-Remaining" -> Seq(remaining.toString),
-        "X-RateLimit-Reset" -> Seq(reset.toString)),
-        Source.fromInputStream(classOf[TestUtil].getResourceAsStream(file + ".json")).mkString)
+        "X-RateLimit-Reset" -> Seq(reset.toString)
+      ),
+        Source.fromInputStream(classOf[TestUtil].getResourceAsStream(file + ".json")).mkString
+    )
   }
 
   private[this] def dummyUnauthorizedExecute = {
     throw HipChatException(
       401,
-      """{"error":{"code":401,"type":"Unauthorized","message":"Auth token invalid. Please see: https:\/\/www.hipchat.com\/docs\/api\/auth"}}""")
+      """{"error":{"code":401,"type":"Unauthorized","message":"Auth token invalid. Please see: https:\/\/www.hipchat.com\/docs\/api\/auth"}}"""
+    )
   }
 }

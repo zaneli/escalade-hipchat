@@ -38,7 +38,8 @@ class Rooms(private[this] val host: String, private[this] val token: String) ext
         "owner_user_id" -> ownerUserId,
         "privacy" -> (if (privateMode) "private" else "public"),
         "topic" -> topic,
-        "guest_access" -> bool2Int(guestAccess))
+        "guest_access" -> bool2Int(guestAccess)
+      )
       val (res, rateLimit) = execute(params)
       val room = parse(res).children.map { Room.apply }.head
       (room, rateLimit)
@@ -74,7 +75,7 @@ class Rooms(private[this] val host: String, private[this] val token: String) ext
       if (date.exists { case (y, m, d) => Try(new DateTime(y, m, d, 0, 0)).isFailure }) {
         throw HipChatException("Invalid date: Set (YYYY, MM, DD).")
       }
-      val (res, rateLimit) = execute(Map("room_id" -> roomId, "date" -> date.map{ case (y, m, d) => f"${y}-${m}%02d-${d}%02d"}.getOrElse("recent"), "timezone" -> timezone))
+      val (res, rateLimit) = execute(Map("room_id" -> roomId, "date" -> date.map { case (y, m, d) => f"${y}-${m}%02d-${d}%02d" }.getOrElse("recent"), "timezone" -> timezone))
       val rooms = (parse(res) \ "messages").children.map { Message.apply }
       (rooms, rateLimit)
     }
@@ -107,7 +108,8 @@ class Rooms(private[this] val host: String, private[this] val token: String) ext
      */
     def call(
       roomId: Int, from: String, message: String,
-      messageFormat: Option[MessageFormat] = None, notify: Boolean = false, color: Option[Color] = None): (String, RateLimit) = {
+      messageFormat: Option[MessageFormat] = None, notify: Boolean = false, color: Option[Color] = None
+    ): (String, RateLimit) = {
       implicit val formats = DefaultFormats
 
       val params = Map(
@@ -116,7 +118,8 @@ class Rooms(private[this] val host: String, private[this] val token: String) ext
         "message" -> message,
         "message_format" -> messageFormat,
         "notify" -> bool2Int(notify),
-        "color" -> color)
+        "color" -> color
+      )
       val (res, rateLimit) = execute(params)
       val status = (parse(res) \ "status").extract[String]
       (status, rateLimit)
@@ -133,7 +136,8 @@ class Rooms(private[this] val host: String, private[this] val token: String) ext
      * @return Set result and Rate Limiting info
      */
     def call(
-      roomId: Int, topic: String, from: Option[String] = None): (String, RateLimit) = {
+      roomId: Int, topic: String, from: Option[String] = None
+    ): (String, RateLimit) = {
       implicit val formats = DefaultFormats
 
       val params = Map("room_id" -> roomId, "topic" -> topic, "from" -> from)
