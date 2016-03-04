@@ -13,9 +13,7 @@ scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature", "-language:impli
 libraryDependencies ++= {
   Seq(
     "com.github.nscala-time" %% "nscala-time" % "2.10.0" % "compile",
-    "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2" % "compile",
     "org.slf4j" % "slf4j-api" % "1.7.18" % "compile",
-    "ch.qos.logback" % "logback-classic" % "1.1.6" % "compile",
     "org.json4s" %% "json4s-native" % "3.3.0" % "compile",
     "org.scalaj" %% "scalaj-http" % "2.2.1" % "compile",
     "org.specs2" %% "specs2-core" % "3.7.1" % "test"

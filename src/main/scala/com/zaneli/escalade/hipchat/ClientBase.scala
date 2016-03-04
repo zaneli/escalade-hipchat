@@ -2,10 +2,10 @@ package com.zaneli.escalade.hipchat
 
 import java.net.URL
 
-import com.typesafe.scalalogging.slf4j.LazyLogging
 import com.zaneli.escalade.hipchat.model.{ RateLimit, TestResult }
 import com.zaneli.escalade.hipchat.util.DataHandler
 import org.json4s.native.JsonMethods.parse
+import org.slf4j.LoggerFactory
 import scalaj.http.Http
 
 import scala.util.{ Failure, Success, Try }
@@ -16,7 +16,9 @@ private[hipchat] abstract sealed class ClientBase(
     private[this] val apiMethod: String,
     private[this] val version: String,
     private[this] val category: String
-) extends DataHandler with LazyLogging {
+) extends DataHandler {
+
+  private[this] lazy val logger = LoggerFactory.getLogger(this.getClass)
 
   protected[this] def execute(params: Map[String, Any]): (String, RateLimit) = {
     val apiParams = value2String(params)
