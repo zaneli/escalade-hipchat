@@ -4,7 +4,7 @@ import com.github.nscala_time.time.Imports.DateTime
 import org.json4s.{ DefaultFormats, JValue }
 
 case class Message private (date: DateTime, from: UserIdentifier, message: String, file: Option[File]) {
-  override def toString = s"Message(date=${date}, from=${from}, message=${message}, file=${file})"
+  override def toString = s"Message(date=$date, from=$from, message=$message, file=$file)"
 }
 
 object Message {
@@ -18,7 +18,7 @@ object Message {
 }
 
 case class File(name: String, size: Int, url: String) {
-  override def toString = s"File(name=${name}, size=${size}, url=${url})"
+  override def toString = s"File(name=$name, size=$size, url=$url)"
 }
 
 object File {

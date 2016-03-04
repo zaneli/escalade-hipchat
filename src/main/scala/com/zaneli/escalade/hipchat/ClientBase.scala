@@ -20,14 +20,14 @@ private[hipchat] abstract sealed class ClientBase(
 
   protected[this] def execute(params: Map[String, Any]): (String, RateLimit) = {
     val apiParams = value2String(params)
-    logger.debug(s"params  = ${apiParams}")
+    logger.debug(s"params  = $apiParams")
 
     val host = s"${baseURL.getProtocol}://${baseURL.getHost}" + Option(baseURL.getPort).collect { case p if p != -1 => s":$p" }.getOrElse("")
-    val (code, headers, body) = callApi(s"${host}/${version}/${category}/${apiMethod}", apiParams)
+    val (code, headers, body) = callApi(s"$host/$version/$category/$apiMethod", apiParams)
 
-    logger.debug(s"code    = ${code}")
-    logger.debug(s"headers = ${headers}")
-    logger.debug(s"body    = ${body}")
+    logger.debug(s"code    = $code")
+    logger.debug(s"headers = $headers")
+    logger.debug(s"body    = $body")
 
     (body, RateLimit(headers))
   }

@@ -25,7 +25,7 @@ class UsersDeleteSpec extends Specification with TestUtil {
     }
 
     "call (set email)" in {
-      val (holder, users) = mockUsers("Deleted", (100, 98, DateTime.now.getMillis / 1000))
+      val (holder, users) = mockUsers("Deleted", (100, 98, DateTime.now().getMillis / 1000))
 
       users.delete.call("chris@hipchat.com")
 

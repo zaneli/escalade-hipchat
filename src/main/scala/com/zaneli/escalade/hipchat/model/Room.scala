@@ -11,9 +11,9 @@ case class Room(
 ) {
 
   override def toString =
-    s"Room(roomId=${roomId}, name=${name}, topic=${topic}, lastActive=${lastActive}, created=${created}, " +
-      s"ownerUserId=${ownerUserId}, isArchived=${isArchived}, isPrivate=${isPrivate}, privacy=${privacy}, " +
-      s"xmppJid=${xmppJid}, memberUserIds=${memberUserIds}, participants=${participants} guestAccessUrl=${guestAccessUrl})"
+    s"Room(roomId=$roomId, name=$name, topic=$topic, lastActive=$lastActive, created=$created, " +
+      s"ownerUserId=$ownerUserId, isArchived=$isArchived, isPrivate=$isPrivate, privacy=$privacy, " +
+      s"xmppJid=$xmppJid, memberUserIds=$memberUserIds, participants=$participants, guestAccessUrl=$guestAccessUrl)"
 }
 
 object Room extends DataHandler {

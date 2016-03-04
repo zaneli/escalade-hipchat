@@ -47,7 +47,7 @@ class RoomsHistorySpec extends Specification with TestUtil {
     }
 
     "call (full params)" in {
-      val (holder, rooms) = mockRooms("Room", (100, 98, DateTime.now.getMillis / 1000))
+      val (holder, rooms) = mockRooms("Room", (100, 98, DateTime.now().getMillis / 1000))
 
       rooms.history.call(7, Some((2013, 12, 1)), Some("Asia/Tokyo"))
 
@@ -57,7 +57,7 @@ class RoomsHistorySpec extends Specification with TestUtil {
     }
 
     "call (invalid date)" in {
-      val (_, rooms) = mockRooms("Room", (100, 98, DateTime.now.getMillis / 1000))
+      val (_, rooms) = mockRooms("Room", (100, 98, DateTime.now().getMillis / 1000))
 
       rooms.history.call(7, Some((2013, 13, 1))) must throwA[HipChatException]("""\QInvalid date: Set (YYYY, MM, DD).\E""")
     }

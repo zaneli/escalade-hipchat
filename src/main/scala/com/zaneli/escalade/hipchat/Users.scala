@@ -150,7 +150,7 @@ class Users(private[this] val host: String, private[this] val token: String) ext
       }
 
       val (res, rateLimit) = execute(Map(
-        "user_id" -> userId, "email" -> email, "name" -> name.map { case (f, l) => s"${f} ${l}" }, "mention_name" -> mentionName, "title" -> title,
+        "user_id" -> userId, "email" -> email, "name" -> name.map { case (f, l) => s"$f $l" }, "mention_name" -> mentionName, "title" -> title,
         "is_group_admin" -> isGroupAdmin.map(bool2Int), "password" -> password, "timezone" -> timezone
       ))
       val user = parse(res).children.map { User.apply }.head

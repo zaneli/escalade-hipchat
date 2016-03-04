@@ -25,7 +25,7 @@ class RoomsTopicSpec extends Specification with TestUtil {
     }
 
     "call (full params)" in {
-      val (holder, rooms) = mockRooms("StatusSent", (100, 98, DateTime.now.getMillis / 1000))
+      val (holder, rooms) = mockRooms("StatusSent", (100, 98, DateTime.now().getMillis / 1000))
 
       rooms.topic.call(7, "Topic", Some("escalade-hipchat"))
 

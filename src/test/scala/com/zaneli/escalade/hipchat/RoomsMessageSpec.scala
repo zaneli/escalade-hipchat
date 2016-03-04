@@ -26,7 +26,7 @@ class RoomsMessageSpec extends Specification with TestUtil {
     }
 
     "call (full params)" in {
-      val (holder, rooms) = mockRooms("StatusSent", (100, 98, DateTime.now.getMillis / 1000))
+      val (holder, rooms) = mockRooms("StatusSent", (100, 98, DateTime.now().getMillis / 1000))
 
       rooms.message.call(7, "user2", "Goodbye!", Some(MessageFormat.Text), true, Some(Color.Green))
 

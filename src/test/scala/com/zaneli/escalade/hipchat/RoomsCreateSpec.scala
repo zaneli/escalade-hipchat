@@ -37,7 +37,7 @@ class RoomsCreateSpec extends Specification with TestUtil {
     }
 
     "call (full params)" in {
-      val (holder, rooms) = mockRooms("CreatedRoom", (100, 98, DateTime.now.getMillis / 1000))
+      val (holder, rooms) = mockRooms("CreatedRoom", (100, 98, DateTime.now().getMillis / 1000))
 
       rooms.create.call("Development", 5, true, Some("topic"), true)
 

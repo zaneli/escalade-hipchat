@@ -77,7 +77,7 @@ class UsersListSpec extends Specification with TestUtil {
     }
 
     "call (full params)" in {
-      val (holder, users) = mockUsers("Users", (100, 98, DateTime.now.getMillis / 1000))
+      val (holder, users) = mockUsers("Users", (100, 98, DateTime.now().getMillis / 1000))
 
       users.list.call(true)
 

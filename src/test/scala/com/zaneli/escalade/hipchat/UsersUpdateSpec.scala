@@ -8,7 +8,7 @@ class UsersUpdateSpec extends Specification with TestUtil {
 
   "users/update" should {
     "call (min params)" in {
-      val (_, users) = mockUsers("User", (100, 99, DateTime.now.getMillis / 1000))
+      val (_, users) = mockUsers("User", (100, 99, DateTime.now().getMillis / 1000))
       users.update.call(5) must throwA[HipChatException]("""\QInvalid params: Set a item at least.\E""")
     }
 

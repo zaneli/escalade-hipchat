@@ -33,14 +33,14 @@ trait TestUtil {
     (holder, users)
   }
 
-  protected[this] def mockUnauthorizedRooms(): Rooms = {
+  protected[this] def mockUnauthorizedRooms: Rooms = {
     new Rooms("token") {
       override def httpExecute(method: String)(path: String, params: Map[String, String]): (Int, Map[String, Seq[String]], String) =
         dummyUnauthorizedExecute
     }
   }
 
-  protected[this] def mockUnauthorizedUsers(): Users = {
+  protected[this] def mockUnauthorizedUsers: Users = {
     new Users("token") {
       override def httpExecute(method: String)(path: String, params: Map[String, String]): (Int, Map[String, Seq[String]], String) =
         dummyUnauthorizedExecute

@@ -13,9 +13,9 @@ object HipChatException {
     val errorType = (parse(body) \ "error" \ "type").extract[String]
     val message = (parse(body) \ "error" \ "message").extract[String]
     if (code == 401) {
-      new HipChatAuthException(s"${code}: ${errorType} (${message})")
+      new HipChatAuthException(s"$code: $errorType ($message)")
     } else {
-      new HipChatException(s"${code}: ${errorType} (${message})")
+      new HipChatException(s"$code: $errorType ($message)")
     }
   }
   def apply(message: String): HipChatException = {

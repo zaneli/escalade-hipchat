@@ -38,7 +38,7 @@ class UsersCreateSpec extends Specification with TestUtil {
     }
 
     "call (full params)" in {
-      val (holder, users) = mockUsers("CreatedUser", (100, 98, DateTime.now.getMillis / 1000))
+      val (holder, users) = mockUsers("CreatedUser", (100, 98, DateTime.now().getMillis / 1000))
 
       users.create.call("test@test.com", ("first_name", "last_name"), Some("mention"), Some("title"), true, Some("password"), Some("UTC"))
 

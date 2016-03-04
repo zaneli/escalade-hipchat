@@ -1,7 +1,6 @@
 package com.zaneli.escalade.hipchat.util
 
 import com.github.nscala_time.time.Imports.DateTime
-import scala.util.Try
 
 trait DataHandler {
 
@@ -21,6 +20,9 @@ trait DataHandler {
     case x => x
   }
 
-  protected[this] def sec2DateTime(sec: Long): Option[DateTime] =
-    if (sec == 0) None else Try(new DateTime(sec * 1000)).toOption
+  protected[this] def sec2DateTime(sec: Long): Option[DateTime] = {
+    PartialFunction.condOpt(sec) {
+      case s if s != 0 => new DateTime(sec * 1000)
+    }
+  }
 }
